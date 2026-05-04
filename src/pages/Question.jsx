@@ -1,7 +1,10 @@
 import React from "react";
 import "./Question.css";
 
+import { useNavigate } from "react-router-dom";
+
 const QuestionBlock = ({ title, color, questions }) => {
+
   return (
     <div className="trait-section">
       <div className="trait-header">
@@ -37,6 +40,7 @@ const QuestionBlock = ({ title, color, questions }) => {
 };
 
 const Question = () => {
+    const navigate = useNavigate();
   return (
     <div className="question-page">
 
@@ -123,7 +127,7 @@ const Question = () => {
 
       {/* Submit */}
       <div className="submit-section">
-        <button className="submit-btn">Submit Assessment</button>
+        <button className="submit-btn" onClick={() => navigate("/result")}>Submit Assessment</button>
         <p>
           By submitting, you agree to our privacy policy regarding personality data analysis.
         </p>
