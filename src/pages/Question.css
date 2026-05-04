@@ -1,0 +1,178 @@
+.question-page {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background: #F8F9FF;
+  padding: 60px 20px;
+}
+
+/* HEADER */
+.header h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: #4F46E5;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;   
+  margin-bottom: 20px;
+}
+
+.header-text {
+  width: 100%;
+  max-width: 900px;          
+  text-align: center;        
+  font-size: 16px;
+  color: #64748B;
+  line-height: 1.6;
+}
+
+.header p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #64748B;
+  max-width: 500px;
+}
+
+/* PROGRESS */
+.progress-card {
+  margin-top: 30px;
+  background: #ffffff;
+  padding: 14px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.progress-card span {
+  font-size: 14px;
+  color: #64748B;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #E5E7EB;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 20%;
+  height: 100%;
+  background: #4F46E5;
+  border-radius: 10px;
+}
+
+.remaining {
+  color: #4F46E5;
+  font-weight: 500;
+}
+
+/* TRAIT */
+.trait-section {
+  margin-top: 40px;
+}
+
+.trait-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trait-bar {
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.trait-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+/* QUESTION CARD */
+.question-card {
+  margin-top: 10px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.question-text {
+  font-size: 16px;
+  color: #475569;
+}
+
+.single-question {
+  margin-bottom: 25px;
+}
+
+.single-question:last-child {
+  margin-bottom: 0;
+}
+
+/* SCALE */
+.scale-row {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scale-label {
+  font-size: 12px;
+  color: #94A3B8;
+}
+
+.circles {
+  display: flex;
+  gap: 15px;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #CBD5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #64748B;
+  cursor: pointer;
+}
+
+.circle:hover {
+  border-color: #4F46E5;
+  color: #4F46E5;
+  transform: scale(1.08);
+
+  box-shadow: 0 0 12px rgba(79, 70, 229, 0.4);
+}
+
+/* SUBMIT */
+.submit-section {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.submit-btn {
+  padding: 14px 40px;
+  border-radius: 999px;
+  border: none;
+  background: #4F46E5;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0px 8px 20px rgba(79, 70, 229, 0.3);
+}
+
+.submit-section p {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #94A3B8;
+}
