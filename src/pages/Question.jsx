@@ -15,7 +15,7 @@ const QuestionBlock = ({ title, color, questions, answers, setAnswers }) => {
       <div className="question-card" style={{ borderTop: `3px solid ${color}` }}>
         
         {questions.map((q, index) => {
-          const key = `${title}-${index}`; // unique id
+          const key = `${title}-${index}`;
 
           return (
             <div key={index} className="single-question">
@@ -30,9 +30,15 @@ const QuestionBlock = ({ title, color, questions, answers, setAnswers }) => {
                     <div
                       key={num}
                       className={`circle ${answers[key] === num ? "selected" : ""}`}
-                      onClick={() =>
-                        setAnswers({ ...answers, [key]: num })
-                      }
+                      onClick={() => {
+                        if (answers[key] === num) {
+                          const updated = { ...answers };
+                          delete updated[key];
+                          setAnswers(updated);
+                        } else {
+                          setAnswers({ ...answers, [key]: num });
+                        }
+                      }}
                     >
                       {num}
                     </div>
@@ -55,9 +61,53 @@ const QuestionBlock = ({ title, color, questions, answers, setAnswers }) => {
 
 const Question = () => {
   const navigate = useNavigate();
-
-  // ✅ State to store answers
   const [answers, setAnswers] = useState({});
+
+  const totalQuestions = 30;
+  const answeredCount = Object.keys(answers).length;
+  const remaining = totalQuestions - answeredCount;
+  const progressPercent = (answeredCount / totalQuestions) * 100;
+
+  /* ---------------- SUBMIT HANDLER ---------------- */
+
+  const handleSubmit = async () => {
+    let payload = {};
+
+    // Map answers → ext1...ext30 (temporary mapping)
+    Object.keys(answers).forEach((key, index) => {
+      payload[`ext${index + 1}`] = answers[key] || 3;
+    });
+
+    // Ensure all 50 features exist
+    const allFeatures = [
+      ...Array.from({ length: 10 }, (_, i) => `ext${i + 1}`),
+      ...Array.from({ length: 10 }, (_, i) => `agr${i + 1}`),
+      ...Array.from({ length: 10 }, (_, i) => `csn${i + 1}`),
+      ...Array.from({ length: 10 }, (_, i) => `est${i + 1}`),
+      ...Array.from({ length: 10 }, (_, i) => `opn${i + 1}`)
+    ];
+
+    allFeatures.forEach(f => {
+      if (!(f in payload)) payload[f] = 3;
+    });
+
+    try {
+      const res = await fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      navigate("/result", { state: data });
+
+    } catch (err) {
+      console.error("API Error:", err);
+    }
+  };
 
   return (
     <div className="question-page">
@@ -77,13 +127,14 @@ const Question = () => {
         <span>Assessment Progress</span>
 
         <div className="progress-bar">
-          <div className="progress-fill"></div>
+          <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
 
-        <span className="remaining">30 Questions Remaining</span>
+        <span className="remaining">{remaining} Questions Remaining</span>
       </div>
 
       {/* Questions */}
+
       <QuestionBlock
         title="Openness to Experience"
         color="#3B82F6"
@@ -163,13 +214,11 @@ const Question = () => {
       <div className="submit-section">
         <button
           className="submit-btn"
-          onClick={() => navigate("/result")}
+          onClick={handleSubmit}
+          disabled={answeredCount !== totalQuestions}
         >
           Submit Assessment
         </button>
-        <p>
-          By submitting, you agree to our privacy policy regarding personality data analysis.
-        </p>
       </div>
 
     </div>
