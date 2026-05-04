@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="home">
 
@@ -12,7 +15,7 @@ const Home = () => {
           Discover the colors of your unique psychological blueprint.
         </p>
 
-        <button className="cta-btn">Take Test</button>
+        <button className="cta-btn" onClick={() => navigate("/test")}>Take Test</button>
       </div>
 
       {/* Instructions Card */}
