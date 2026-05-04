@@ -202,10 +202,5 @@ Result Page
   <li>Enhance personality insights</li>
   <li>Deploy the application</li>
 </ul>
-
-<h3>Author</h3>
-<p>
-Ishita Sinha<br>
-Data Analyst @ Boston Scientific<br>
 Machine Learning Enthusiast
 </p>
